@@ -13,10 +13,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Custom Map-server with OSRM',
-      home: const MapWithRoute(),
-    );
+    return MaterialApp(title: 'My Map-server', home: const MapWithRoute());
   }
 }
 
@@ -47,7 +44,6 @@ class _MapWithRouteState extends State<MapWithRoute> {
 
   Future<void> fetchRoute() async {
     if (startPoint == null || endPoint == null) return;
-
     try {
       final points = await getRouteFromOSRM(
         startPoint!.latitude,
@@ -110,7 +106,7 @@ class _MapWithRouteState extends State<MapWithRoute> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Flutter Map con Ruta OSRM'),
+        title: const Text('My Map-server'),
         actions: [
           IconButton(
             onPressed: () {
@@ -134,8 +130,10 @@ class _MapWithRouteState extends State<MapWithRoute> {
         ),
         children: [
           TileLayer(
+            //urlTemplate:"http://10.0.2.2:8080/styles/test-style/{z}/{x}/{y}.png",
             urlTemplate:
-                "http://10.0.2.2:8080/styles/test-style/{z}/{x}/{y}.png",
+                "http://192.168.0.120:8080/styles/test-style/{z}/{x}/{y}.png",
+
             userAgentPackageName: 'com.example.app',
           ),
           if (routePoints.isNotEmpty)
